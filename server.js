@@ -3,6 +3,8 @@ const app = express();
 const port = 2000;
 const mongoose = require('mongoose');
 
+require('dotenv').config();
+
 app.use(express.urlencoded({extended:true}));
 
 //TO CONNECT WITH LOCAL DATABASE 
@@ -13,7 +15,7 @@ app.use(express.urlencoded({extended:true}));
 
 // TO CONNECT WITH ATLAS
 
-mongoose.connect('mongodb+srv://ameenaharis7:cnntmdl6@cluster0.n1djxlp.mongodb.net/?retryWrites=true&w=majority',{useNewUrlParser:true},{useUnifiedToplogy:true})
+mongoose.connect(process.env.MONGODB_URI,{useNewUrlParser:true},{useUnifiedToplogy:true})
 .then((data)=> console.log(`database is connected with ${data.connection.host}`))
 .catch((err) => console.log(err.message));
 
